@@ -12,7 +12,7 @@ c.alpha = @(t,q,p) 0;
 c.gamma = @(t,q,p) 0;
 c.P     = @(t,q,p) (t>200 & t < 230)*1000000;
 
-r0      = p.Rz + 120e3;
+r0      = p.Rz + 60e3;
 v0      = 2200;
 theta0  = 30*pi/180;
 psi0    = 0;
