@@ -1,4 +1,6 @@
 function dqdt = yar_dqdt(t,q,p,c)
+%yar_dqdt Уравнения движения спускаемого аппарата 
+% (уравнения из монографии Ярошевского)
 
 r       = q(1);
 v       = q(2);
@@ -12,14 +14,19 @@ g   = p.g(r);
 [ss, rho]  = atm_data(r-p.Rz);
 M   = v/ss;
 
+% Управляемые параметры: угол атаки, скоростной угол крена, тяга 
 alpha = c.alpha(t,q,p); 
 gamma = c.gamma(t,q,p);
 P     = c.P(t,q,p);
+
+
 Pxa    = -P*cos(alpha);
 Pya    = -P*sin(alpha);
 
+% Аэродинамические коэффициенты
 cx    = p.Cx(M,alpha);
 cy    = p.Cy(M,alpha);
+% Скоростной напор
 q     = 0.5*rho*v*v;
 
 dv    = - g*sin(theta)-cx*p.Sm*q/m+Pxa/m;
@@ -30,6 +37,7 @@ dpsi  = (cy*p.Sm*q*sin(gamma)/m-Pya*sin(gamma)/m-v*v/r*tan(phi)*cos(theta)^2*cos
 dphi  = v*cos(theta)*sin(psi)/r;
 dlambda = v*cos(theta)*cos(psi)/(r*cos(phi));
 
+% Секундный расход массы
 dm    = -P/p.Is(P);
 
 dqdt = [dr;dv;dtheta;dpsi;dphi;dlambda;dm];

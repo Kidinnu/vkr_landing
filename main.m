@@ -25,7 +25,6 @@ opt     = odeset('RelTol',1e-7,'AbsTol',1e-8,'Events',@(t,q) event_function(t,q,
 [t,q]   = ode113(@(t,q) yar_dqdt(t,q,p,c),[0 400], q0, opt);
 
 plot(t,(q(:,1)-p.Rz)*0.001);
-plot(t, q(:,2));
 
 
 ecef0 = sph2ecef(lambda0,phi0,p.Rz);
