@@ -12,7 +12,7 @@ g   = p.g(r);
 [ss, rho]  = atm_data(r-p.Rz);
 M   = v/ss;
 
-alpha = c.alpha(t,q,p);
+alpha = c.alpha(t,q,p); 
 gamma = c.gamma(t,q,p);
 P     = c.P(t,q,p);
 Pxa    = -P*cos(alpha);
