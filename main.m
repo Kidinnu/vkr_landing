@@ -12,12 +12,12 @@ clc;
 dt = 30;
 t1 = 200;
 
-for gamma = linspace(0,2*pi,32)
+for days= linspace(1,15,365)
 
     p.Is = @(P) 3000;
 
-    c.alpha = @(t,q,p) (t>t1 & t < t1+dt)*0.5;
-    c.gamma = @(t,q,p) (t>t1 & t < t1+dt)*gamma;
+    c.alpha = @(t,q,p) (t>t1 & t < t1+dt)*0;
+    c.gamma = @(t,q,p) (t>t1 & t < t1+dt)*0;
     c.P     = @(t,q,p) (t>t1 & t < t1+dt)*100000*9.807;
 
     r0      = p.Rz + 70e3;
@@ -28,6 +28,8 @@ for gamma = linspace(0,2*pi,32)
     lambda0 = 0;
     m0      = 48000;
     q0      = [r0;v0;theta0;psi0;phi0;lambda0;m0];
+    p.f107  = 200;
+    p.day   = days;
 
     opt     = odeset('RelTol',1e-7,'AbsTol',1e-6,'Events',@(t,q) event_function(t,q,p,c));
     [t,q]   = ode45(@(t,q) yar_dqdt(t,q,p,c),[0 500], q0, opt);

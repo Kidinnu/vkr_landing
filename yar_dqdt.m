@@ -11,7 +11,7 @@ lambda  = q(6);
 m       = q(7);
 
 g   = p.g(r);
-[ss, rho]  = atm_data(r-p.Rz);
+[ss, rho]  = atm_data(r-p.Rz,p);
 M   = v/ss;
 
 % Управляемые параметры: угол атаки, скоростной угол крена, тяга 
