@@ -29,11 +29,11 @@ cy    = p.Cy(M,alpha);
 % Скоростной напор
 q     = 0.5*rho*v*v;
 
-dv    = - g*sin(theta)-cx*p.Sm*q/m+Pxa/m;
+dv    = - g*sin(theta)-cx*p.Sm*q/m+Pxa/m - r*p.we^2*(cos(phi)*sin(theta)-sin(phi)*sin(psi)*cos(theta))*cos(phi);
 dr    = v*sin(theta);
-dtheta= (g*(v*v/(r*g)-1)*cos(theta)+cy*p.Sm*q*cos(gamma)/m-Pya*cos(gamma)/m)/v;
+dtheta= (g*(v*v/(r*g)-1)*cos(theta)+cy*p.Sm*q*cos(gamma)/m-Pya*cos(gamma)/m)/v+2*p.we*cos(phi)*cos(psi)+(1/v)*r*p.we^2*(sin(phi)*sin(theta)*sin(psi)+cos(phi)*cos(psi))*cos(phi);
+dpsi  = (cy*p.Sm*q*sin(gamma)/m-Pya*sin(gamma)/m-v*v/r*tan(phi)*cos(theta)^2*cos(psi))/(v*cos(theta))-(2*p.we*(sin(phi)*cos(theta)-cos(phi)*sin(theta)*sin(psi))+r*p.we^2*sin(phi)*cos(phi)*cos(psi)/v)/cos(theta);
 
-dpsi  = (cy*p.Sm*q*sin(gamma)/m-Pya*sin(gamma)/m-v*v/r*tan(phi)*cos(theta)^2*cos(psi))/(v*cos(theta));
 dphi  = v*cos(theta)*sin(psi)/r;
 dlambda = v*cos(theta)*cos(psi)/(r*cos(phi));
 
